@@ -34,12 +34,12 @@ export class TokenMsStack extends cdk.Stack {
     );
 
     // API Gateway
-    const api = new RestApi(this, "Token API", {
+    const api = new RestApi(this, "TokenGw", {
       endpointTypes: [EndpointType.REGIONAL],
     });
     api.root.addMethod("POST", new LambdaIntegration(handleTokenUser));
 
-    new CfnApiMapping(this, `token-path-mapping`, {
+    new CfnApiMapping(this, `UsersMsPathMapping`, {
       apiId: api.restApiId,
       domainName: subdomain,
       stage: api.deploymentStage.stageName,
