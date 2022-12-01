@@ -36,6 +36,9 @@ export class TokenMsStack extends cdk.Stack {
     // API Gateway
     const api = new RestApi(this, "TokenGw", {
       endpointTypes: [EndpointType.REGIONAL],
+      defaultCorsPreflightOptions: {
+        allowOrigins: ["*"],
+      },
     });
     api.root.addMethod("POST", new LambdaIntegration(handleTokenUser));
 
